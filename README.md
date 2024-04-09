@@ -2,7 +2,7 @@
 ## Walktrough
 
 <p align="center">
-  <img src="https://github.com/Abdy01/DVWA/blob/main/!images/logo.png?raw=true">
+  <img src="https://github.com/Abdy01/DVWA-Walktrough/blob/main/!images/logo.png?raw=true">
 </p>
 
 
@@ -20,13 +20,13 @@ If you want to know more about the application and follow the installation steps
 
 ## Overview
 <p align="left">
-  <img src="https://github.com/Abdy01/DVWA/blob/main/!images/login.png?raw=true">
+  <img src="https://github.com/Abdy01/DVWA-Walktrough/blob/main/!images/login.png?raw=true">
 </p>
 
 First time you have to login with the default credentials admin:password, then you will have access at the main page.
 
 <p align="left">
-  <img src="https://github.com/Abdy01/DVWA/blob/main/!images/Main.png?raw=true">
+  <img src="https://github.com/Abdy01/DVWA-Walktrough/blob/main/!images/Main.png?raw=true">
 </p>
 
 On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities. First time you have to
@@ -43,5 +43,5 @@ On the Application you can find four levels of Security:
 Is important to take each step of security and check the source code to see how the code should be implemented to be secured.
 
 <p align="left">
-  <img src="https://github.com/Abdy01/DVWA/blob/main/!images/Security.png?raw=true">
+  <img src="https://github.com/Abdy01/DVWA-Walktrough/blob/main/!images/Security.png?raw=true">
 </p>
