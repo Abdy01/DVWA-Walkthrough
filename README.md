@@ -5,18 +5,20 @@
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/!images/logo.png?raw=true">
 </p>
 
-
-"Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is damn vulnerable. It's main goal is to be an aid for security professionals to test
+```
+Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is damn vulnerable. It's main goal is to be an aid for security professionals to test
 their skills and tools in a legal environment, help web developers better understand the processes of securing web applications and to aid both
 students & teachers to learn about web application security in a controlled class room environment.
 
 The aim of DVWA is to practice some of the most common web vulnerabilities, with various levels of difficultly, with a simple straightforward interface.
 
-The scope of this project is to test some of the vulnerabilities from DVWA on the Low Security Level."
+The scope of this project is to test some of the vulnerabilities from DVWA on the Low Security Level.
+```
+Source: DVWA Documentation
 
 ## Important!
-My goal is to make you understand how each vulnerability works. This application is not created by me and all rights belong to digininja.
-If you want to know more about the application and follow the installation steps, I invite you to check this link: https://github.com/digininja/DVWA
+My goal is to make you to understand how each vulnerability works. This application is not created by me and all rights belong to digininja.
+If you want to know more about the application or to follow the installation steps, I invite you to check: https://github.com/digininja/DVWA
 
 ## Overview
 <p align="left">

