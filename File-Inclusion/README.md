@@ -105,6 +105,8 @@ Now we have access on the server and we can go and read the `/hackable/flags/fi.
 
 Is interesting that the fourth message is encrypted in the file, so we were able to read it the first time with the help of file inclusion vulnerability.
 
+Note: In order to practice on RFI exercise, `allow_url_include` option should be enabled.
+
 ## Medium Security
 
 ## High Security
