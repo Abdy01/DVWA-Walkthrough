@@ -3,8 +3,11 @@
 ## About
 
 > Some web applications allow the user to specify input that is used directly into file streams or allows the user to upload files to the server.
+
 > At a later time the web application accesses the user supplied input in the web applications context. By doing this, the web application is allowing the potential for malicious file execution.
+
 > If the file chosen to be included is local on the target machine, it is called "Local File Inclusion (LFI). But files may also be included on other machines, which then the attack is a "Remote File Inclusion (RFI).
+
 > When RFI is not an option. using another vulnerability with LFI (such as file upload and directory traversal) can often achieve the same effect.
 > 
 > Note, the term "file inclusion" is not the same as "arbitrary file access" or "file disclosure".
@@ -73,7 +76,7 @@ Even if we directly visit the page, not through the file inclusion vulnerability
 That means that the third one is not accessible via client-side.
 
 ## File Inclusion vs Directory Traversal
-The difference between these 2 is that through the directory traversal vulnerability we will able to read files from the system, but with file inclusion, the file is also included in the page.
+The difference between these 2 is that through the directory traversal vulnerability we will be able to read files from the system, but with file inclusion, the file is also included in the page.
 This is why we were not able to read the fifth quote directly from the page, because the php code was executed, so the comment line was treated as a comment and not included as text in the page.
 
 For example reading `/etc/passwd` will be the same for directory traversal and also for file inclusion because is just a file with text.
@@ -92,7 +95,7 @@ Now, on our page we will be able to see the content of the files from other doma
 RFI is more dangerous than LFI because usually leads to Remote Code Execution.
 For the next example we will host a python server and use a reverse shell for the RFI vulnerability.
 
-A php reverse shell can be downloaded from here: `https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php`
+A php reverse shell can be downloaded from here: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
 Edit it with the ip of your machine and the port you want to use, for this example the ip will be 127.0.0.1 and port 4444.
 Start a python server at the location of the reverse shell file: `python3 -m http.server 4445`
 Start a netcat listener: `nc -lvnp 4444`
