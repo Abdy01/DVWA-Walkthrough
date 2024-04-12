@@ -2,9 +2,9 @@
 
 ## About
 
-> Some web applications allow the user to specify input that is used directly into file streams or allows the user to upload files to the server.\n
-> At a later time the web application accesses the user supplied input in the web applications context. By doing this, the web application is allowing the potential for malicious file execution.\n
-> If the file chosen to be included is local on the target machine, it is called "Local File Inclusion (LFI). But files may also be included on other machines, which then the attack is a "Remote File Inclusion (RFI).\n
+> Some web applications allow the user to specify input that is used directly into file streams or allows the user to upload files to the server.<br />
+> At a later time the web application accesses the user supplied input in the web applications context. By doing this, the web application is allowing the potential for malicious file execution.<br />
+> If the file chosen to be included is local on the target machine, it is called "Local File Inclusion (LFI). But files may also be included on other machines, which then the attack is a "Remote File Inclusion (RFI).<br />
 > When RFI is not an option. using another vulnerability with LFI (such as file upload and directory traversal) can often achieve the same effect.
 > 
 > Note, the term "file inclusion" is not the same as "arbitrary file access" or "file disclosure".
