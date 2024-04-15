@@ -6,9 +6,9 @@
 </p>
 
 
-> Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is damn vulnerable.<br />
-> It's main goal is to be an aid for security professionals to test their skills and tools in a legal environment, help web developers better understand the processes of securing web applications and to aid both students & teachers to learn about web application security in a controlled class room environment.<br />
-> The aim of DVWA is to practice some of the most common web vulnerabilities, with various levels of difficultly, with a simple straightforward interface.<br />
+> Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is damn vulnerable.<br/>
+> It's main goal is to be an aid for security professionals to test their skills and tools in a legal environment, help web developers better understand the processes of securing web applications and to aid both students & teachers to learn about web application security in a controlled class room environment.<br/>
+> The aim of DVWA is to practice some of the most common web vulnerabilities, with various levels of difficultly, with a simple straightforward interface.<br/>
 
 Source: DVWA Documentation
 
@@ -27,7 +27,7 @@ First time you have to login with the default credentials admin:password, then y
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/!images/Main.png?raw=true">
 </p>
 
-On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities.<br />
+On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities.<br/>
 First time you have to set the security of the application.<br />
 Another setting that you can make is to reset the database, in case you mess around with the application.
 

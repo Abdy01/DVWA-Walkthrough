@@ -2,9 +2,9 @@
 
 ## About
 
-> A SQL injection attack consists of insertion or "injection" of a SQL query via the input data from the client to the application.<br />
-> A successful SQL injection exploit can read sensitive data from the database, modify database data (insert/update/delete), execute administration operations on the database (such as shutdown the DBMS), recover the content of a given file present on the DBMS file system (load_file) and in some cases issue commands to the operating system.<br />
-> SQL injection attacks are a type of injection attack, in which SQL commands are injected into data-plane input in order to effect the execution of predefined SQL commands.<br />
+> A SQL injection attack consists of insertion or "injection" of a SQL query via the input data from the client to the application.<br/>
+> A successful SQL injection exploit can read sensitive data from the database, modify database data (insert/update/delete), execute administration operations on the database (such as shutdown the DBMS), recover the content of a given file present on the DBMS file system (load_file) and in some cases issue commands to the operating system.<br/>
+> SQL injection attacks are a type of injection attack, in which SQL commands are injected into data-plane input in order to effect the execution of predefined SQL commands.<br/>
 > This attack may also be called "SQLi".
 
 Source: DVWA Documentation
@@ -200,7 +200,7 @@ For this exercise a new window for the input will open, so the input is transfer
 </p>
 
 As we can see the `$id` is still sent unsecured.
-In this query we have a `LIMIT 1` which will make the query to return only one record from the database, but this can still be commented using injection with `#` symbol.<br />
+In this query we have a `LIMIT 1` which will make the query to return only one record from the database, but this can still be commented using injection with `#` symbol.<br/>
 In this case, the same payloads will work for High security level.
 
 <p align="center">

