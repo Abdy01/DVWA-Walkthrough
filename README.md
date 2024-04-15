@@ -27,8 +27,8 @@ First time you have to login with the default credentials admin:password, then y
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/!images/Main.png?raw=true">
 </p>
 
-On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities. First time you have to
-set the security of the application.
+On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities.<br />
+First time you have to set the security of the application.<br />
 Another setting that you can make is to reset the database, in case you mess around with the application.
 
 ## Security

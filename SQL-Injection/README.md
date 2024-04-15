@@ -200,7 +200,7 @@ For this exercise a new window for the input will open, so the input is transfer
 </p>
 
 As we can see the `$id` is still sent unsecured.
-In this query we have a `LIMIT 1` which will make the query to return only one record from the database, but this can still be commented using injection with `#` symbol.
+In this query we have a `LIMIT 1` which will make the query to return only one record from the database, but this can still be commented using injection with `#` symbol.<br />
 In this case, the same payloads will work for High security level.
 
 <p align="center">

