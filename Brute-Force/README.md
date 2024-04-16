@@ -17,13 +17,13 @@ Hydra is a very common tool that people usually use, but for DVWA laboratory Hyd
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/Brute-Force/!images/bf1.png?raw=true">
 </p>
 
-First, we will make a login attemtp and then we will save the request in a file named request.txt. I used Burp Suite to see the request.
+First, we will make a login attempt and then we will save the request in a file named request.txt. I used Burp Suite to see the request.
 
-<p align="center">
+<p align="center">	
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/Brute-Force/!images/bf2.png?raw=true">
 </p>
 
-We will change the password entered with the word `FFUF`, to let the tool know where to insert the password.
+We will change the password entered with the word `FUZZ`, to let the tool know where to insert the password.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/Brute-Force/!images/bf3.png?raw=true">
