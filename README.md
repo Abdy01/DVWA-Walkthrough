@@ -14,7 +14,9 @@ Source: DVWA Documentation
 
 ## Important!
 My goal is to make you to understand how each vulnerability works. This application is not created by me and all rights belong to digininja.
-If you want to know more about the application or to follow the installation steps, I invite you to check: https://github.com/digininja/DVWA
+If you want to know more about the application or to follow the installation steps, I invite you to check: https://github.com/digininja/DVWA .<br/>
+
+The attacks presented are intended for educational purposes only. Unauthorized use of these attacks on web applications without explicit permission is illegal and unethical. Use responsibly and with proper authorization.
 
 ## Overview
 <p align="left">
