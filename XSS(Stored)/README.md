@@ -10,7 +10,7 @@
 Source: DVWA Documentation
 
 ## Low Security
-I recommend first to read the XSS (Reflected) challenge, to better understand this one.<br/>
+I recommend first to read the XSS (Reflected) challenge to better understand this one.<br/>
 The challenge for this vulnerability looks like this:
 
 <p align="center">

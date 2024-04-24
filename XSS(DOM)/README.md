@@ -23,12 +23,17 @@ The item selected is also reflected in the URL, so we can edit it from there.
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(DOM)/!images/xssd2.png?raw=true">
 </p>
 
+The difference here, in DOM XSS, is that the input is not reflected in the source code, but it is reflected in HTML DOM.<br/>
+I really recommend this article to better understand DOM XSS: https://ethicalhacs.com/dvwa-dom-xss-exploit/ .
+
 Source code:
 ```php
 <?php
 # No protections, anything goes
 ?> 
 ```
+The objective of the challenge is to steal the cookie of a logged in user. Similar solutions are already presented in XSS Reflected section.
+
 ## Medium Security
 For Medium level we have the following source code:
 ```php

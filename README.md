@@ -18,7 +18,7 @@ If you want to know more about the application or to follow the installation ste
 
 The attacks presented are intended for educational purposes only. Unauthorized use of these attacks on web applications without explicit permission is illegal and unethical. Use responsibly and with proper authorization.
 
-I know there are multiple articles regarding DVWA challenges, but I wanted to create a full walkthrough based on my own experience, and to explain a little more than is necessary.<br/>
+I know there are multiple articles regarding DVWA challenges, but I wanted to create a full and updated walkthrough based on my own experience, and to explain a little more than is necessary.<br/>
 I encourage you to check other available walkthroughs, because you will find different perspectives on how to solve challenges.<br/>
 I want to mention 2 walkthroughs from which I was inspired:
 - CryptoCat DVWA playlist on Youtube.

