@@ -14,9 +14,15 @@ Source: DVWA Documentation
 
 ## Important!
 My goal is to make you to understand how each vulnerability works. This application is not created by me and all rights belong to digininja.
-If you want to know more about the application or to follow the installation steps, I invite you to check: https://github.com/digininja/DVWA .<br/>
+If you want to know more about the application or to follow the installation steps, I invite you to check: https://github.com/digininja/DVWA .
 
 The attacks presented are intended for educational purposes only. Unauthorized use of these attacks on web applications without explicit permission is illegal and unethical. Use responsibly and with proper authorization.
+
+I know there are multiple articles regarding DVWA challenges, but I wanted to create a full walkthrough based on my own experience, and to explain a little more than is necessary.<br/>
+I encourage you to check other available walkthroughs, because you will find different perspectives on how to solve challenges.<br/>
+I want to mentioned 2 walkthroughs from which I was inspired:
+- CryptoCat DVWA playlist on Youtube.
+- https://github.com/keewenaw/dvwa-guide-2019/blob/master/
 
 ## Overview
 <p align="left">
@@ -30,7 +36,7 @@ First time you have to login with the default credentials admin:password, then y
 </p>
 
 On the main page you can find some information about application and on the left side you will see a list of buttons with the vulnerabilities.<br/>
-First time you have to set the security of the application.<br />
+First time you have to set the security of the application.<br/>
 Another setting that you can make is to reset the database, in case you mess around with the application.
 
 ## Security
