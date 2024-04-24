@@ -20,7 +20,7 @@ The attacks presented are intended for educational purposes only. Unauthorized u
 
 I know there are multiple articles regarding DVWA challenges, but I wanted to create a full walkthrough based on my own experience, and to explain a little more than is necessary.<br/>
 I encourage you to check other available walkthroughs, because you will find different perspectives on how to solve challenges.<br/>
-I want to mentioned 2 walkthroughs from which I was inspired:
+I want to mentione 2 walkthroughs from which I was inspired:
 - CryptoCat DVWA playlist on Youtube.
 - https://github.com/keewenaw/dvwa-guide-2019/blob/master/
 
