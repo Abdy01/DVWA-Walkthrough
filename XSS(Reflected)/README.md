@@ -106,5 +106,7 @@ generateSessionToken();
 
 ?> 
 ```
-For the Impossible level, we have Anti-CSRF token implemented and our input is verified with `htmlspecialchars()` function. This function will convert the special HTML characters to not be interpreted as HTML valid code.<br/>
+For the Impossible level, we have Anti-CSRF token implemented and our input is verified with `htmlspecialchars()` function. This function will convert the special HTML characters in order to not be interpreted as HTML valid code.<br/>
+For example `&` becomes `&amp;`, `"` becomes `&quot;`, and so on.<br/>
+Much more, in Impossible level the `X-XSS-Protection` header is not set to 0 anymore. This header stops pages from loading when detects reflected cross-site scripting (XSS) attacks. Nowadays `Content-Security-Policy` header is preferred instead.<br/>
 In this case, we will not be able to use any special characters to alterate the application's code. 

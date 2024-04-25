@@ -100,15 +100,21 @@ There is a technique that can be used to exploit this vulnerability. Using the `
 
 The payload used: `?default=#English<script>alert(1)</script>`.
 
-Another method which I discovered later, is to use the `&` (AND) operator like this: `?default=English&<script>alert(1)</script>`. In this case, the English value will be treated as true and the second group is still accepted because the condition is that one of them to be true.
+Another method which I discovered later, is to use the `&` (AND) operator like this: `?default=English&<script>alert(1)</script>`. In this case, the English value will be treated as true and the second group is still accepted because the condition needs only one value to be true.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(DOM)/!images/xssd6.png?raw=true">
 </p>
 
 ## Impossible Security
-The Impossible level does not actually use any implementations in the back-end, because the content of the URL is encoded by default by most of the browsers in client side.
+The Impossible level does not actually use any protection in the back-end, because the content of the URL is encoded by default by most of the browsers in client side.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(DOM)/!images/xssd7.png?raw=true">
+</p>
+
+By looking at the source code we can see that `decodeURI()` function is not used anymore. This means that the characters remain URL encrypted.
+
+<p align="center">
+  <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(DOM)/!images/xssd8.png?raw=true">
 </p>
