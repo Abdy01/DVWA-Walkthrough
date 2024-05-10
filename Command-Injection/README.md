@@ -123,4 +123,4 @@ if( ( is_numeric( $octet[0] ) ) && ( is_numeric( $octet[1] ) ) && ( is_numeric( 
 ```
 Instead of black-listing all the elements that can lead to an injection, is more efficient to white-list the input that you expect to receive.<br/>
 In this scenario, a strict filter was implemented to be sure that only IP addresses are inserted.<br/>
-Even if the typo from High level was not made, maybe a payload still exist that can bypass the list from the previous one. I am not aware of it. However, filtering by the input that you expect is a better implementation.
+Even if the typo from High level hadn't been made, maybe a payload still exist that can bypass the list from the previous one. I am not aware of it. However, filtering by the input that you expect is a better implementation.

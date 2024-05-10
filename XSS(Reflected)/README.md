@@ -29,7 +29,7 @@ Because our input is also reflected in the URL, we can send it to anyone and onc
 The URL: `http://localhost/DVWA/vulnerabilities/xss_r/?name=Hacked%22%3Cscript%3Ealert%281%29%3C%2Fscript%3E#`.<br/>
 
 In our payload, the impact is not harmful, we only triggered an alert box with number 1. This payload is usually used to confirm the presence of an XSS attack.<br/>
-But more dangerous things can be done, for example rewriting the source code in order to ask the user to insert his password to continue. But the password is sent to the attacker.
+But more dangerous things can be done, for example rewriting the source code in order to ask the user to insert their password to continue. But the password is sent to the attacker.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(Reflected)/!images/xssr3.png?raw=true">

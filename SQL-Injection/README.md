@@ -15,7 +15,7 @@ Source: DVWA Documentation
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection/!images/sql1.png?raw=true">
 </p>
 
-Inserting `1'` will return an error, that's means that SQL Injection could be possible.
+Inserting `1'` will return an error, that means that SQL Injection could be possible.
 
 Visiting the source code we can find:
 ```php
