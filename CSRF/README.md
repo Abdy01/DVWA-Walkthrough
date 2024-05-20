@@ -10,7 +10,7 @@
 Source: DVWA Documentation
 
 ## Low Security
-The functionality of this exercise is a change password input and the objective of the challenge is to make the current user change their own password, without them knowing about their actions, using a CSRF attack.
+The functionality of this exercise is a change password mechanism and the objective of the challenge is to make the current user change their own password, without them knowing about their actions, using a CSRF attack.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/CSRF/!images/csrf1.png?raw=true">
@@ -139,8 +139,9 @@ Author of the script: https://systemweakness.com/hackerman-sergio-csrf-tutorial-
 
 Create an iframe of the csrf path with the id "myFrame" and then use it in the payload() function to take the user_token and send it further.<br/>
 The elements are hidden because we don't want to expose this to the target.<br/>
-We will set the security to Low in order to upload the file on the server. The main goal is to solve only the csrf challenge on High level, so for a moment we can set it to Low for the additional steps.<br/>
-Then after the file is uploaded, we can send the full path to our target. When the page is visited, this is happening:
+We will set the security to Low in order to upload the file on the server. The main goal is to solve only the csrf challenge on High level, so is not a problem to use Low level for the additional steps.<br/>
+Upload the file on the server and change back the level to High.<br/>
+Now, we can send the path to the file to our target. When the page is visited, this is happening:
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/CSRF/!images/csrf9.png?raw=true">
