@@ -11,7 +11,7 @@
 Source: DVWA Documentation
 
 ## Low Security
-The functionality is almost the same as the previous challenge (SQL Injection). We have an ID input and we can verify if the user with that ID exist or not.
+The functionality is almost the same as the previous challenge (SQL Injection). We have an ID input and we can verify if the user with that ID is valid.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection(Blind)/!images/sqlib1.png?raw=true">
@@ -25,9 +25,9 @@ The same payload used to return all users from the database will not work in thi
 </p>
 
 Even if the payload seems that is not working, this is not the case. We received a True response because we compared `2` which will return True, with the True statement:`1=1`.<br/>
-So in this case a True OR True value will return True.
+So in this case a True `OR` True value will return True.
 
-For example `2' AND 1=1;#` will return True, but `2' AND 1=2;#` will return False, because for AND operator both items must be True to return True.
+For example `2' AND 1=1;#` will return True, but `2' AND 1=2;#` will return False, because for `AND` operator both items must be True to return True.
 
 <p align="center">
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/SQL-Injection(Blind)/!images/sqlib3.png?raw=true">
@@ -35,7 +35,7 @@ For example `2' AND 1=1;#` will return True, but `2' AND 1=2;#` will return Fals
 
 With this we confirmed the presence of SQL Blind Injection.
 
-To better understand this concept, please take a look at `Boolean Logical Operators`.
+To better understand this concept, please take a look at `Boolean Logical Operators`.<br/>
 https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators
 
 We can also test the vulnerability using sleep() commands. We can say `2' AND sleep(3);#` and if the injection is successful the response will come after 3 seconds.
@@ -52,8 +52,7 @@ Using the following payload we can start enumerate the version one by one: `2' A
 </p>
 
 We can see that the version starts with `10.`. If you already completed SQL Injection part, you know that the version in my case is `10.11.6-MariaDB-2`.<br/>
-Of course the process is not simple and requires a lot of time. For exploitations like this, automation is the key.<br/>
-You can create your own scripts or use known tools.<br/>
+Of course the process is not simple and requires a lot of time. For exploitations like this, automation is the key. You can create your own scripts or use known tools.
 
 Source code:
 ```php
