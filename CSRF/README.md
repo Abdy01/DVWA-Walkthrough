@@ -135,7 +135,7 @@ First we will create the following exploit and save it as csrf.html:
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/CSRF/!images/csrf8.png?raw=true">
 </p>
 
-Author of the script: https://systemweakness.com/hackerman-sergio-csrf-tutorial-dvwa-high-security-level-4cba47f2d695 <br/>
+Inspired from: https://systemweakness.com/hackerman-sergio-csrf-tutorial-dvwa-high-security-level-4cba47f2d695 <br/>
 
 Create an iframe of the csrf path with the id "myFrame" and then use it in the payload() function to take the user_token and send it further.<br/>
 The elements are hidden because we don't want to expose this to the target.<br/>
