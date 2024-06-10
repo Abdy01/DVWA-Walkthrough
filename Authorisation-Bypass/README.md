@@ -91,7 +91,7 @@ Now, we can no longer receive data.
 
 But only the GET request was restricted, the update functionality still work.
 
-Another attack that you can used in other exercises would be to rewrite other user's information, such as password:
+Another attack that you can use in other exercises would be to rewrite other user's information, such as password:
 ```json
 {
 	"id":5,"first_name":"Bob",
