@@ -2,9 +2,12 @@
 
 ## About
 
-> The purpose of the command injection attack is to inject and execute commands specified by the attacker in the vulnerable application. In situation like this, the application, which executes unwanted system commands, is like a pseudo system shell, and the attacker may use it as any authorized system user. However, commands are executed with the same privileges and environment as the web service has.<br/>
-> Command injection attacks are possible in most cases because of lack of correct input data validation, which can be manipulated by the attacker (forms, cookies, HTTP headers etc.).<br/>
-> The syntax and commands may differ between the Operating Systems (OS), such as Linux and Windows, depending on their desired actions.<br/>
+> The purpose of the command injection attack is to inject and execute commands specified by the attacker in the vulnerable application. In situation like this, the application, which executes unwanted system commands, is like a pseudo system shell, and the attacker may use it as any authorized system user. However, commands are executed with the same privileges and environment as the web service has.
+> 
+> Command injection attacks are possible in most cases because of lack of correct input data validation, which can be manipulated by the attacker (forms, cookies, HTTP headers etc.).
+> 
+> The syntax and commands may differ between the Operating Systems (OS), such as Linux and Windows, depending on their desired actions.
+> 
 > This attack may also be called "Remote Command Execution (RCE)".
 
 Source: DVWA Documentation
