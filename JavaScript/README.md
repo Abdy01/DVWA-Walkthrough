@@ -172,13 +172,13 @@ Now, if the request is sent with the new token:
 The challenge is done!<br/>
 
 ### Other approach
-Another option is to host a server with the javascript file deobfuscated and to point the web application to this one.<br/>
+Another option is to host a server with the JavaScript file deobfuscated and to point the web application to this one.<br/>
 This is also helping because now we can use Debugger to see how are the functions executed.
 
 I said that the challenge was not easy because I didn't think the first time to take the functions in name order.<br/>
-With a new deobfuscated javascript file and the debugger, the functions are executed in a different order, something like this:<br/>
+With a new deobfuscated JavaScript file and the Debugger, the functions are executed in a different order, something like this:<br/>
 - "token_part_3()" (probably because is triggered in the line 463, when the "send" button is clicked)
-- now the sha256 function is executing the final token
+- here, the sha256() function is executing the final token
 - the request is sent
 - debugger continues with the line 459 where the "phrase" gets an empty value
 - setTimeout(300)
@@ -195,7 +195,9 @@ If we simply add our word in the source code, the challenge will be solved.
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/JavaScript/!images/js18.png?raw=true">
 </p>
 
-However, following the debugger, the order is the same as described at "Other approach" section.
+However, following the Debugger, I didn't manage to understand the order of the functions.<br/>
+If you want to see how to change the JavaScript file and how to use Debugger, you can find a walkthrough video at CryptoCat:<br/>
+https://www.youtube.com/watch?v=3IfHy97pog0
 
 ## Impossible Security
 The impossible level does not really exist in this case.
