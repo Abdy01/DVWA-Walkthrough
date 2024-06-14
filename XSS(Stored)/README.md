@@ -30,6 +30,8 @@ In the image above, we added a malicious payload containing javascript code, and
   <img src="https://github.com/Abdy01/DVWA-Walkthrough/blob/main/XSS(Stored)/!images/xsss3.png?raw=true">
 </p>
 
+Note that the cookies for DVWA are "PHPSESSID" and "security". You are all right if you have just these 2. I have other cookies because I worked on other laboratories, so all of these were hosted on localhost.
+
 Source code:
 ```php
 <?php
